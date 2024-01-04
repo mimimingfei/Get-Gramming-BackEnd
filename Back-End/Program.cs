@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Back_End.Models;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -29,3 +28,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
