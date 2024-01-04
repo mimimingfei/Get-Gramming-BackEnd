@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Back_End.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240103151913_RestaurantCreate")]
-    partial class RestaurantCreate
+    [Migration("20240104093546_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
