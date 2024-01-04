@@ -18,4 +18,5 @@ public class RestaurantsController : ControllerBase
     {
         return await _context.Restaurants.ToListAsync();
     }
+
 }
