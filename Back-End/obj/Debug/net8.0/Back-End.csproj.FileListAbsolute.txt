@@ -419,3 +419,4 @@ C:\Users\kshek\Source\Repos\Get-Gramming-BE\Back-End\obj\Debug\net8.0\Back-End.p
 C:\Users\kshek\Source\Repos\Get-Gramming-BE\Back-End\obj\Debug\net8.0\Back-End.genruntimeconfig.cache
 C:\Users\kshek\Source\Repos\Get-Gramming-BE\Back-End\obj\Debug\net8.0\ref\Back-End.dll
 C:\Users\cdesale\source\repos\Get-Gramming-BackEnd\Back-End\bin\Debug\net8.0\restaurantsData.json
+C:\Users\cdesale\source\repos\Get-Gramming-BackEnd\Back-End\bin\Debug\net8.0\BCrypt.Net-Next.dll

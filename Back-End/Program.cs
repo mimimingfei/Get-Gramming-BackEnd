@@ -3,10 +3,13 @@ using Back_End.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Back_End.IService;
+using Back_End.Service;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreDB")));
 builder.Services.AddControllers();
+builder.Services.AddScoped<IUserService, UserService>();
 // Add CORS services and define the policy
 builder.Services.AddCors(options =>
 {

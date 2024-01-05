@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Back_End.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240104093546_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240105144700_UserCreate")]
+    partial class UserCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,31 @@ namespace Back_End.Migrations
                             Name = "Jehova es Mi Pastor Tacos y Burritos",
                             PhotosUrl = "https://s3-media0.fl.yelpcdn.com/bphoto/fWCgiPBAAoF_8i-aXxwl9g/l.jpg"
                         });
+                });
+
+            modelBuilder.Entity("Back_End.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }
