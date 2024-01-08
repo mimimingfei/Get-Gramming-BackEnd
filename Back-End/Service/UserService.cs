@@ -37,5 +37,14 @@ namespace Back_End.Service
             _dbContext.SaveChanges();
             return new FeUser(oUser.Username, oUser.Email, "token");
         }
+
+        public async Task<IEnumerable<User>> GetAllUsers()
+        {
+            return await _dbContext.Users.ToListAsync();
+        }
+        public async Task<User> GetUserById(int id)
+        {
+            return await _dbContext.Users.FindAsync(id);
+        }
     }
 }

@@ -6,19 +6,39 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Back_End.Controllers
 {
-    [Route("users")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
+      
         IUserService _userService;
 
         public UsersController(IUserService userService)
         {
             _userService = userService;
         }
+        // GET users
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            var users = await _userService.GetAllUsers();
+            return Ok(users);
+        }
 
-        // POST users/register
-        [HttpPost("register")]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
+        {
+            var user = await _userService.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
+
+
+    // POST users/register
+    [HttpPost("register")]
         public FeUser Register([FromBody] User oUser)
         {
             return _userService.Register(oUser);
@@ -30,5 +50,6 @@ namespace Back_End.Controllers
         {
             return _userService.Login(loginUser);
         }
+    
     }
 }

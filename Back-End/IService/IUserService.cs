@@ -6,5 +6,7 @@ namespace Back_End.IService
     {
         FeUser Register(User oUser);
         FeUser Login(InputLoginUser loginUser);
+        Task<IEnumerable<User>> GetAllUsers();
+        Task<User> GetUserById (int id);
     }
 }
