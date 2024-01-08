@@ -49,6 +49,38 @@ public class RestaurantsController : ControllerBase
         return restaurantsByCuisine;
     }
 
+    [HttpGet("cuisine/{cuisine}/city/{city}")]
+    public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurantsByCuisineAndCity([FromRoute] string cuisine, [FromRoute] string city)
+    {
+        var restaurantsByCuisineAndCity = await _context.Restaurants
+            .Where(r => r.City.ToLower() == city.ToLower() && r.Cuisine.ToLower() == cuisine.ToLower())
+            .ToListAsync();
+
+        if (restaurantsByCuisineAndCity == null || !restaurantsByCuisineAndCity.Any())
+        {
+            return NotFound();
+        }
+
+        return Ok(restaurantsByCuisineAndCity);
+    }
+    [HttpGet("city/{city}/cuisines")]
+    public async Task<ActionResult<IEnumerable<string>>> GetCuisinesByCity([FromRoute] string city)
+    {
+        var cuisinesInCity = await _context.Restaurants
+            .Where(r => r.City.ToLower() == city.ToLower())
+            .Select(r => r.Cuisine)
+            .Distinct()
+            .ToListAsync();
+
+        if (cuisinesInCity == null || !cuisinesInCity.Any())
+        {
+            return NotFound();
+        }
+
+        return Ok(cuisinesInCity);
+    }
+
+
     [HttpGet("user/{userId}")]
     public async Task<ActionResult<List<Restaurant>>> GetRestaurantsByUserAsync([FromRoute] int userId)
     {
