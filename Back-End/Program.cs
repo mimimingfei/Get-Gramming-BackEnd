@@ -8,6 +8,8 @@ using Back_End.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Formatters;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreDB")));
@@ -39,6 +41,8 @@ builder.Services.AddCors(options =>
                          .AllowAnyMethod();
     });
 });
+builder.Services.AddControllers()
+    .AddNewtonsoftJson();
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
