@@ -1,5 +1,6 @@
 ﻿using Back_End.IService;
 using Back_End.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -37,8 +38,9 @@ namespace Back_End.Controllers
         }
 
 
-    // POST users/register
-    [HttpPost("register")]
+        // POST users/register
+        [HttpPost("register")]
+        [AllowAnonymous]
         public FeUser Register([FromBody] User oUser)
         {
             return _userService.Register(oUser);
@@ -46,6 +48,7 @@ namespace Back_End.Controllers
 
         // POST users/login
         [HttpPost("login")]
+        [AllowAnonymous]
         public FeUser Login([FromBody] InputLoginUser loginUser)
         {
             return _userService.Login(loginUser);
