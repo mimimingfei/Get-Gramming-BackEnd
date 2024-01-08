@@ -70,6 +70,7 @@ public class RestaurantsController : ControllerBase
             .Where(r => r.City.ToLower() == city.ToLower())
             .Select(r => r.Cuisine)
             .Distinct()
+            .OrderBy(c => c)
             .ToListAsync();
 
         if (cuisinesInCity == null || !cuisinesInCity.Any())

@@ -568,3 +568,4 @@ C:\Users\mwang\source\repos\Get-Gramming-BackEnd\Back-End\obj\Debug\net8.0\ref\B
 C:\Users\mwang\Source\Repos\Get-Gramming-BackEnd\Back-End\bin\Debug\net8.0\userData.json
 C:\Users\kshek\source\repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\userData.json
 C:\Users\kshek\source\repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\kshek\Source\Repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
