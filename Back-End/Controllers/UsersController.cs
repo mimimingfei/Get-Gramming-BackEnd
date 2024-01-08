@@ -41,17 +41,17 @@ namespace Back_End.Controllers
         // POST users/register
         [HttpPost("register")]
         [AllowAnonymous]
-        public FeUser Register([FromBody] User oUser)
+        public async Task<ActionResult<FeUser>> Register([FromBody] User oUser)
         {
-            return _userService.Register(oUser);
+            return await _userService.Register(oUser);
         }
 
         // POST users/login
         [HttpPost("login")]
         [AllowAnonymous]
-        public FeUser Login([FromBody] InputLoginUser loginUser)
+        public async Task<ActionResult<FeUser>> Login([FromBody] InputLoginUser loginUser)
         {
-            return _userService.Login(loginUser);
+            return await _userService.Login(loginUser);
         }
     
     }
