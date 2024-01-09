@@ -64,6 +64,10 @@ namespace Back_End.Service
         {
             return await _dbContext.Users.FindAsync(id);
         }
+        public async Task<User> GetUserByUsername(string username)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
+        }
 
         private string generateToken(User user)
         {
