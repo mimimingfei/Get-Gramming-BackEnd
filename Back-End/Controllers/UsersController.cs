@@ -37,6 +37,18 @@ namespace Back_End.Controllers
             return user;
         }
 
+        [HttpGet("username/{username}")]
+        public async Task<ActionResult<User>> GetUserByUsername(string username)
+        {
+            var user = await _userService.GetUserByUsername(username);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
+
+
 
         // POST users/register
         [HttpPost("register")]
