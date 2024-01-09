@@ -33,7 +33,7 @@ namespace Back_End.Service
             bool isValidPassword = BCrypt.Net.BCrypt.Verify(loginUser.Password, user.PasswordHash);
             if (isValidPassword)
             {
-                return new FeUser(user.Username, user.Email, generateToken(user));
+                return new FeUser(user.Id, user.Username, user.Email, generateToken(user));
             }
 
             return new UnauthorizedObjectResult("Incorrect password");
@@ -52,8 +52,11 @@ namespace Back_End.Service
             oUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(oUser.PasswordHash);
             _dbContext.Users.Add(oUser);
             _dbContext.SaveChanges();
+            var registeredUser = _dbContext.Users
+                .Where(user => user.Username == oUser.Username)
+                .FirstOrDefault();
 
-            return new FeUser(oUser.Username, oUser.Email, generateToken(oUser));
+            return new FeUser(registeredUser.Id, oUser.Username, oUser.Email, generateToken(oUser));
         }
 
         public async Task<IEnumerable<User>> GetAllUsers()
