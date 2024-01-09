@@ -86,12 +86,17 @@ public class RestaurantsController : ControllerBase
     [HttpGet("user/{userId}")]
     public async Task<ActionResult<List<Restaurant>>> GetRestaurantsByUserAsync([FromRoute] int userId)
     {
-        var restaurantsByUser = await _context.Restaurants
-                                        .Where(r => r.UserId == userId)
-                                        .ToListAsync();
-        if (!restaurantsByUser.Any())
+        var userExists = await _context.Users.AnyAsync(u => u.Id == userId);
+        if (!userExists)
         {
             return NotFound();
+        }
+        var restaurantsByUser = await _context.Restaurants
+                                              .Where(r => r.UserId == userId)
+                                              .ToListAsync();
+        if (!restaurantsByUser.Any())
+        {
+            return BadRequest("User exists, user hasn't posted any restaurants.");
         }
         return restaurantsByUser;
     }
