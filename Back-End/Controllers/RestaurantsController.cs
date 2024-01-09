@@ -1,4 +1,5 @@
 using Back_End.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 [ApiController]
@@ -138,7 +139,32 @@ public class RestaurantsController : ControllerBase
         return Ok(restaurant);
     }
 
-
+    //patch restaurant
+    //patch
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> PatchRestaurant(int id, [FromBody] JsonPatchDocument<Restaurant> patchDoc)
+    {
+        if (patchDoc != null)
+        {
+            var restaurant = await _context.Restaurants.FirstOrDefaultAsync(r => r.Id == id);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+            patchDoc.ApplyTo(restaurant, ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            _context.Update(restaurant);
+            await _context.SaveChangesAsync();
+            return Ok(restaurant);
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
 
 
 }

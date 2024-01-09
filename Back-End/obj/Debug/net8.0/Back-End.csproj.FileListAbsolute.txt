@@ -569,3 +569,11 @@ C:\Users\mwang\Source\Repos\Get-Gramming-BackEnd\Back-End\bin\Debug\net8.0\userD
 C:\Users\kshek\source\repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\userData.json
 C:\Users\kshek\source\repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\kshek\Source\Repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\mwang\source\repos\Get-Gramming-BackEnd\Back-End\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\mwang\source\repos\Get-Gramming-BackEnd\Back-End\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\mwang\source\repos\Get-Gramming-BackEnd\Back-End\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\mwang\source\repos\Get-Gramming-BackEnd\Back-End\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+>>>>>>> 31667fe9fa55392d48e6b67f7c1cc2751fca89ec
+C:\Users\kshek\Source\Repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\kshek\Source\Repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\kshek\Source\Repos\Get-Gramming-BE\Back-End\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
