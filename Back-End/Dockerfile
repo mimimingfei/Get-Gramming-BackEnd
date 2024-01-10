@@ -9,7 +9,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Back-End/Back-End.csproj", "Back-End/"]
+COPY ["Back-End.csproj", "Back-End/"]
 RUN dotnet restore "./Back-End/./Back-End.csproj"
 COPY . .
 WORKDIR "/src/Back-End"
