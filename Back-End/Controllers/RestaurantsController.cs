@@ -1,4 +1,6 @@
+using Back_End.IService;
 using Back_End.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +9,11 @@ using Microsoft.EntityFrameworkCore;
 public class RestaurantsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-    public RestaurantsController(ApplicationDbContext context)
+    private readonly IUserService _userService;
+    public RestaurantsController(ApplicationDbContext context, IUserService userService)
     {
         _context = context;
+        _userService = userService;
     }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Restaurant>>> GetRestaurants()
@@ -103,12 +107,20 @@ public class RestaurantsController : ControllerBase
 
     //delete a restaurant by id
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> DeleteRestaurant(int id)
     {
         var restaurant = await _context.Restaurants.FindAsync(id);
         if (restaurant == null)
         {
             return NotFound();
+        }
+
+        //authorize user
+        var currentLoggedInUser = _userService.GetCurrentUserFromAuthToken(HttpContext);
+        if (currentLoggedInUser.Id != restaurant.UserId)
+        {
+            return BadRequest("Restaurant does not belong to the logged in user");
         }
 
         _context.Restaurants.Remove(restaurant);
@@ -118,11 +130,19 @@ public class RestaurantsController : ControllerBase
     }
     //post a new restaurant
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> PostRestaurant([FromBody] Restaurant newRestaurant)
     {
         if (newRestaurant == null)
         {
             return BadRequest("Invalid restaurant data.");
+        }
+
+        //authorize user
+        var currentLoggedInUser = _userService.GetCurrentUserFromAuthToken(HttpContext);
+        if(currentLoggedInUser.Id != newRestaurant.UserId)
+        {
+            return BadRequest("User does not match to the logged in user");
         }
 
         _context.Restaurants.Add(newRestaurant);
@@ -147,6 +167,7 @@ public class RestaurantsController : ControllerBase
     //patch restaurant
     //patch
     [HttpPatch("{id}")]
+    [Authorize]
     public async Task<IActionResult> PatchRestaurant(int id, [FromBody] JsonPatchDocument<Restaurant> patchDoc)
     {
         if (patchDoc != null)
@@ -156,6 +177,14 @@ public class RestaurantsController : ControllerBase
             {
                 return NotFound();
             }
+
+            //validate user before updating the restaurant card
+            var currentLoggedInUser = _userService.GetCurrentUserFromAuthToken(HttpContext);
+            if (currentLoggedInUser.Id != restaurant.UserId)
+            {
+                return BadRequest("User does not match to the logged in user");
+            }
+
             patchDoc.ApplyTo(restaurant, ModelState);
             if (!ModelState.IsValid)
             {
@@ -169,7 +198,7 @@ public class RestaurantsController : ControllerBase
         {
             return BadRequest();
         }
-    }
 
+    }
 
 }

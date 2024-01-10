@@ -10,5 +10,6 @@ namespace Back_End.IService
         Task<IEnumerable<User>> GetAllUsers();
         Task<User> GetUserById (int id);
         Task<User> GetUserByUsername(string username);
+        User GetCurrentUserFromAuthToken(HttpContext httpContext);
     }
 }

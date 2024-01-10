@@ -72,6 +72,22 @@ namespace Back_End.Service
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
         }
 
+        //method to get current user for authorisation
+        public User GetCurrentUserFromAuthToken(HttpContext httpContext)
+        {
+            var identity = httpContext.User.Identity as ClaimsIdentity;
+
+            if (identity != null)
+            {
+                var userClaims = identity.Claims;
+
+                var userName = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.NameIdentifier)?.Value;
+
+                return _dbContext.Users.Where(user => user.Username == userName).FirstOrDefault();
+            }
+            return null;
+        }
+
         private string generateToken(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
